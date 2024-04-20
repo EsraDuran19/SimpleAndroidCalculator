@@ -53,7 +53,44 @@ class MainActivity : AppCompatActivity() {
         button_add= findViewById(R.id.add_btn)
         button_sub= findViewById(R.id.minus_btn)
         button_equal= findViewById(R.id.equal_btn)
+        addListener(button_1,"1")
+        addListener(button_2,"2")
+        addListener(button_3,"3")
+        addListener(button_4,"4")
+        addListener(button_5,"5")
+        addListener(button_6,"6")
+        addListener(button_7,"7")
+        addListener(button_8,"8")
+        addListener(button_9,"9")
+        addListener(button_0,"0")
+        addListener(button_dot,".")
+        addListener1(button_div,1)
+        addListener1(button_mul,2)
+        addListener1(button_add,3)
+        addListener1(button_sub,4)
+        button_equal.setOnClickListener {
+            showResult()
+            memory1 = result_screen.text.toString().toDouble()
+            mode=0
+            mode_num=0
+        }
+
     }
+    private fun addListener(buttonName: Button, text: String){
+        buttonName.setOnClickListener {
+        }
+    }
+    private fun addListener1(buttonName: Button, text: Int) {
+        buttonName.setOnClickListener {
+
+        }
+    }
+
+       private fun showResult() {
+            var sonuc: Double = 0.000000
+            var screen = result_screen.text.toString().toDouble()
+        }
+
 }
 
 
