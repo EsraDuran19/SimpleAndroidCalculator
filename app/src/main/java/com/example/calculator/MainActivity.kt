@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         button_add= findViewById(R.id.add_btn)
         button_sub= findViewById(R.id.minus_btn)
         button_equal= findViewById(R.id.equal_btn)
+
         addListener(button_1,"1")
         addListener(button_2,"2")
         addListener(button_3,"3")
@@ -74,23 +75,73 @@ class MainActivity : AppCompatActivity() {
             mode=0
             mode_num=0
         }
-
+        button_ac.setOnClickListener {
+            result_screen.text =""
+            mode=0
+            mode_num=0
+            memory1 = ("0").toDouble()
+        }
+        button_delete.setOnClickListener {
+            var x :String
+            if (result_screen.text.length>1) {
+                x = result_screen.text.substring(0, result_screen.text.length - 1)
+            }
+            else {
+                x=""
+                mode=0
+                mode_num=0
+            }
+            result_screen.text =x
+        }
     }
     private fun addListener(buttonName: Button, text: String){
         buttonName.setOnClickListener {
+            if (result_screen.text.contains('.') && text == ".") {
+                print("")
+            } else {
+                if (mode_num != 1) {
+                    result_screen.text = text
+                } else {
+                    result_screen.text = "${result_screen.text}$text"
+                }
+                mode_num = 1
+            }
         }
     }
-    private fun addListener1(buttonName: Button, text: Int) {
+    private fun addListener1(buttonName: Button, text: Int){
         buttonName.setOnClickListener {
 
+            if(mode==1 || mode==2 || mode==3 || mode==4) {
+                showResult()
+            }
+            memory1 = result_screen.text.toString().toDouble()
+            print(memory1)
+            mode=text
+            mode_num=0
         }
     }
 
-       private fun showResult() {
-            var sonuc: Double = 0.000000
-            var screen = result_screen.text.toString().toDouble()
+
+    private fun showResult() {
+        var sonuc: Double =0.000000
+        var screen=result_screen.text.toString().toDouble()
+
+        if (mode==1){
+            sonuc= memory1 / screen
+        }
+        else if (mode==2){
+            sonuc= memory1 * screen
+        }
+        else if (mode==3){
+            sonuc= memory1 + screen
+        }
+        else if (mode==4){
+            sonuc= memory1 - screen
         }
 
+        result_screen.text = sonuc.toString()
+
+    }
 }
 
 
